@@ -191,3 +191,16 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
 @media (prefers-reduced-motion: reduce) {
   .terminal-cursor { animation:none; }
 }
+
+
+/* Final placement: auto-playing terminal occupies the hero visual area */
+.hero-terminal-visual { display:flex; align-items:center; justify-content:center; min-width:0; }
+.hero-terminal-visual .terminal-shell { width:100%; max-width:640px; }
+.hero-terminal-visual .terminal-screen { min-height:225px; max-height:280px; }
+.hero-terminal-visual .terminal-footer { flex-wrap:wrap; }
+@media (min-width: 900px) {
+  .hero-terminal-visual { padding-top: 12px; }
+}
+@media (max-width: 899px) {
+  .hero-terminal-visual { margin-top: 1rem; }
+}

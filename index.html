@@ -64,36 +64,27 @@
           </div>
           <div class="hero-meta"><span>📍 Bangladesh</span><span>🎓 DUET · CSE</span><span>🌐 Remote collaboration</span></div>
         </div>
-        <div class="hero-visual" aria-label="Portrait and OSINT research visual">
-          <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
-          <div class="radar" aria-hidden="true"><div class="radar-sweep"></div><span class="radar-point point-one"></span><span class="radar-point point-two"></span><span class="radar-point point-three"></span><div class="radar-center">N</div></div>
-          <img class="hero-portrait" src="profile.webp" alt="Portrait of Md Kamrujjaman, known as NiloySec" width="800" height="800" fetchpriority="high">
-          <div class="float-card card-top"><span class="mini-icon">⌕</span><div><b>Open-source research</b><small>Find · Assess · Verify</small></div></div>
-          <div class="float-card card-bottom"><span class="mini-icon">✓</span><div><b>Evidence-led reporting</b><small>Sources & limitations</small></div></div>
-          <div class="visual-label">FIELD NOTES <span>•</span> OSINT / 01</div><div class="hud-corner hud-tl" aria-hidden="true"></div><div class="hud-corner hud-br" aria-hidden="true"></div><div class="signal-readout" aria-hidden="true"><span>INTEL STATUS</span><b>PUBLIC SOURCES</b><small>VERIFY BEFORE CONCLUDE</small></div>
+        <div class="hero-visual hero-terminal-visual" aria-label="Auto-playing NiloySec browser terminal">
+          <div class="terminal-shell">
+            <div class="terminal-topbar">
+              <div class="terminal-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="terminal-window-title" id="terminal-title">NILOYSEC // BROWSER TERMINAL</div>
+              <span class="terminal-status"><i></i> LOCAL SIMULATION</span>
+            </div>
+            <div class="terminal-screen" id="terminalScreen" role="log" aria-live="polite" aria-relevant="additions text">
+              <div class="terminal-line terminal-muted">NiloySec Interactive Terminal v1.0 · Safe browser simulation</div>
+              <div class="terminal-line">Automated session · commands run one at a time</div>
+            </div>
+            <div class="terminal-input-row terminal-auto-row" aria-live="polite"><span class="terminal-prompt">root@niloysec:~$</span><span id="terminalAutoCommand" class="terminal-auto-command"></span><span class="terminal-cursor" aria-hidden="true"></span><button type="button" class="terminal-run" id="terminalReplay">REPLAY ↻</button></div>
+            <div class="terminal-footer"><span>BROWSER SHELL</span><span>Auto-play simulation · no server commands</span><button type="button" id="terminalClear">CLEAR</button></div>
+          </div>
         </div>
       </div>
       <div class="container ticker"><span>OSINT</span><i></i><span>DIGITAL FOOTPRINTS</span><i></i><span>IMAGE RESEARCH</span><i></i><span>CYBERSECURITY</span></div>
     </section>
 
     
-    <section class="section terminal-section" id="terminal" aria-labelledby="terminal-title">
-      <div class="container">
-        <div class="terminal-shell">
-          <div class="terminal-topbar">
-            <div class="terminal-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <div class="terminal-window-title" id="terminal-title">NILOYSEC // BROWSER TERMINAL</div>
-            <span class="terminal-status"><i></i> LOCAL SIMULATION</span>
-          </div>
-          <div class="terminal-screen" id="terminalScreen" role="log" aria-live="polite" aria-relevant="additions text">
-            <div class="terminal-line terminal-muted">NiloySec Interactive Terminal v1.0 · Safe browser simulation</div>
-            <div class="terminal-line">Automated session · commands run one at a time</div>
-          </div>
-          <div class="terminal-input-row terminal-auto-row" aria-live="polite"><span class="terminal-prompt">root@niloysec:~$</span><span id="terminalAutoCommand" class="terminal-auto-command"></span><span class="terminal-cursor" aria-hidden="true"></span><button type="button" class="terminal-run" id="terminalReplay">REPLAY ↻</button></div>
-          <div class="terminal-footer"><span>BROWSER SHELL</span><span>Auto-play simulation · no server commands</span><button type="button" id="terminalClear">CLEAR</button></div>
-        </div>
-      </div>
-    </section>
+
 \n    <section class="section" id="about">
       <div class="container two-col">
         <div><p class="eyebrow">01 / ABOUT</p><h2>Curiosity guided by <span class="gradient-text">evidence.</span></h2></div>
