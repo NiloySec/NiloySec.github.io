@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://niloysec.github.io/sitemap.xml
