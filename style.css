@@ -422,3 +422,24 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   text-align:center;
 }
 .reviews-portfolio-cta p { margin:0; }
+
+
+/* Keep the shell prompt stationary; animate only command text after it */
+.hero-terminal-inline .terminal-fixed-prompt {
+  color: #41f3be;
+  font-weight: 600;
+  white-space: pre;
+}
+.hero-terminal-inline .terminal-command-text {
+  color: #41f3be;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.hero-terminal-inline .terminal-output-group {
+  margin-top: .45rem;
+  color: #b8cbd7;
+}
+.hero-terminal-inline .terminal-output {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
