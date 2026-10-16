@@ -232,3 +232,43 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
 .hero-terminal-inline { margin-top: 0; margin-bottom: clamp(1rem, 2vw, 1.5rem); }
 .hero-terminal-inline .terminal-screen { min-height: 70px; max-height: 90px; overflow: hidden; }
 .hero-terminal-inline .terminal-shell { max-width: 680px; }
+
+
+/* Minimal hero terminal sample box — removes marked topbar, intro, replay and footer */
+.hero-terminal-inline .terminal-sample-box {
+  width: 100%;
+  max-width: 680px;
+  overflow: hidden;
+  border: 1px solid rgba(65,243,190,.42);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(5,22,28,.98), rgba(6,14,25,.98));
+  box-shadow: 0 12px 38px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.025);
+}
+.hero-terminal-inline .terminal-sample-box .terminal-screen {
+  min-height: 66px;
+  max-height: 80px;
+  padding: 14px 16px 4px;
+  overflow: hidden;
+  border: 0;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-auto-row {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 16px 13px;
+  gap: 8px;
+  border: 0;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-prompt {
+  font-size: .78rem;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-auto-command {
+  font-size: .82rem;
+}
+@media (max-width: 640px) {
+  .hero-terminal-inline .terminal-sample-box .terminal-screen { padding-inline: 12px; }
+  .hero-terminal-inline .terminal-sample-box .terminal-auto-row { padding-inline: 12px; flex-wrap: wrap; }
+  .hero-terminal-inline .terminal-sample-box .terminal-prompt { font-size: .68rem; }
+}

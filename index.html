@@ -53,18 +53,13 @@
     <section class="hero section" id="home">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="hero-terminal-inline" aria-label="Auto-playing NiloySec browser terminal"><div class="terminal-shell">
-            <div class="terminal-topbar">
-              <div class="terminal-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="terminal-window-title" id="terminal-title">NILOYSEC // BROWSER TERMINAL</div>
-              <span class="terminal-status"><i></i> LOCAL SIMULATION</span>
+          <div class="hero-terminal-inline" aria-label="Auto-playing NiloySec browser terminal"><div class="terminal-shell terminal-sample-box" aria-label="Auto-playing terminal sample">
+            <div class="terminal-screen" id="terminalScreen" role="log" aria-live="polite" aria-relevant="additions text"></div>
+            <div class="terminal-input-row terminal-auto-row">
+              <span class="terminal-prompt">root@niloysec:~$</span>
+              <span id="terminalAutoCommand" class="terminal-auto-command"></span>
+              <span class="terminal-cursor" aria-hidden="true"></span>
             </div>
-            <div class="terminal-screen" id="terminalScreen" role="log" aria-live="polite" aria-relevant="additions text">
-              <div class="terminal-line terminal-muted">NiloySec Interactive Terminal v1.0 · Safe browser simulation</div>
-              <div class="terminal-line">Automated session · commands run one at a time</div>
-            </div>
-            <div class="terminal-input-row terminal-auto-row" aria-live="polite"><span class="terminal-prompt">root@niloysec:~$</span><span id="terminalAutoCommand" class="terminal-auto-command"></span><span class="terminal-cursor" aria-hidden="true"></span><button type="button" class="terminal-run" id="terminalReplay">REPLAY ↻</button></div>
-            <div class="terminal-footer"><span>BROWSER SHELL</span><span>One command at a time · no server commands</span><button type="button" id="terminalClear">CLEAR</button></div>
           </div></div>
           <h1>Research.<br><span class="gradient-text">Verify.</span> Report.</h1>
           <p class="hero-lede">I'm <strong>Md Kamrujjaman</strong>, a freelance OSINT researcher and Computer Science & Engineering student interested in digital investigations and cybersecurity.</p>
