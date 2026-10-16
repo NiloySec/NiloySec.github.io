@@ -41,7 +41,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="NiloySec home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" role="img" aria-label=""><path d="M6 25V7h5l10 11V7h5v18h-5L11 14v11z" fill="currentColor"/><path d="M6 7h5l10 11V7h5" fill="none" stroke="#08202a" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span>NiloySec</span></a>
+      <a class="brand" href="#home" aria-label="NiloySec home"><span class="brand-mark">N</span><span>NiloySec<span class="dot">.</span></span></a>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="#about">About</a><a href="#services">Services</a><a href="#portfolio">Portfolio</a><a href="#case-studies">Case studies</a><a href="#reviews">Reviews</a><a href="#skills">Skills</a><a href="#learning">Learning</a><a href="#education">Education</a><a class="nav-contact" href="#contact">Contact</a>
@@ -53,7 +53,7 @@
     <section class="hero section" id="home">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="profile-intro"><span class="profile-initial" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 25V7h5l10 11V7h5v18h-5L11 14v11z" fill="currentColor"/><path d="M6 7h5l10 11V7h5" fill="none" stroke="#08202a" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span>Md Kamrujjaman <span class="intro-divider">/</span> NiloySec <span class="live-chip"><i></i> OSINT ANALYST</span></span></div>
+          <div class="profile-intro"><span class="profile-initial" aria-hidden="true">N</span><span>Md Kamrujjaman <span class="intro-divider">/</span> NiloySec <span class="live-chip"><i></i> OSINT ANALYST</span></span></div>
           <p class="eyebrow"><span class="status-dot"></span> OSINT RESEARCH · DIGITAL INVESTIGATIONS</p>
           <h1>Research.<br><span class="gradient-text">Verify.</span> Report.</h1>
           <p class="hero-lede">I'm <strong>Md Kamrujjaman</strong>, a freelance OSINT researcher and Computer Science & Engineering student interested in digital investigations and cybersecurity.</p>
@@ -76,7 +76,25 @@
       <div class="container ticker"><span>OSINT</span><i></i><span>DIGITAL FOOTPRINTS</span><i></i><span>IMAGE RESEARCH</span><i></i><span>CYBERSECURITY</span></div>
     </section>
 
-    <section class="section" id="about">
+    
+    <section class="section terminal-section" id="terminal" aria-labelledby="terminal-title">
+      <div class="container">
+        <div class="terminal-shell">
+          <div class="terminal-topbar">
+            <div class="terminal-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="terminal-window-title" id="terminal-title">NILOYSEC // BROWSER TERMINAL</div>
+            <span class="terminal-status"><i></i> LOCAL SIMULATION</span>
+          </div>
+          <div class="terminal-screen" id="terminalScreen" role="log" aria-live="polite" aria-relevant="additions text">
+            <div class="terminal-line terminal-muted">NiloySec Interactive Terminal v1.0 · Safe browser simulation</div>
+            <div class="terminal-line">Automated session · commands run one at a time</div>
+          </div>
+          <div class="terminal-input-row terminal-auto-row" aria-live="polite"><span class="terminal-prompt">root@niloysec:~$</span><span id="terminalAutoCommand" class="terminal-auto-command"></span><span class="terminal-cursor" aria-hidden="true"></span><button type="button" class="terminal-run" id="terminalReplay">REPLAY ↻</button></div>
+          <div class="terminal-footer"><span>BROWSER SHELL</span><span>Auto-play simulation · no server commands</span><button type="button" id="terminalClear">CLEAR</button></div>
+        </div>
+      </div>
+    </section>
+\n    <section class="section" id="about">
       <div class="container two-col">
         <div><p class="eyebrow">01 / ABOUT</p><h2>Curiosity guided by <span class="gradient-text">evidence.</span></h2></div>
         <div class="section-copy"><p>I help with OSINT research and digital investigations by analyzing publicly available information and organizing findings into clear, evidence-based reports.</p><p>I study Computer Science and Engineering at Dhaka University of Engineering & Technology (DUET). Through freelance projects, I have gained practical exposure to online research, image-based investigation, digital footprint analysis, and investigative reporting.</p><p>My approach emphasizes systematic research, source verification, responsible information handling, and a clear distinction between verified evidence and assumptions. I continue to develop my analytical skills and cybersecurity knowledge.</p></div>
@@ -207,7 +225,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="container footer-inner"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" role="img" aria-label=""><path d="M6 25V7h5l10 11V7h5v18h-5L11 14v11z" fill="currentColor"/><path d="M6 7h5l10 11V7h5" fill="none" stroke="#08202a" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span>NiloySec</span></a><p>Evidence-led research. Responsible investigation.</p><p>© <span id="year"></span> Md Kamrujjaman</p></div></footer>
+  <footer class="footer"><div class="container footer-inner"><a class="brand" href="#home"><span class="brand-mark">N</span><span>NiloySec<span class="dot">.</span></span></a><p>Evidence-led research. Responsible investigation.</p><p>© <span id="year"></span> Md Kamrujjaman</p></div></footer>
   <script src="script.js" defer></script>
 </body>
 </html>
