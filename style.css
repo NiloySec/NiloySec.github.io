@@ -467,3 +467,17 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
+
+/* EProhori project showcase */
+.eprohori-card{margin-top:12px}
+.eprohori-visual{background:radial-gradient(circle at 48% 30%,#153d49 0,transparent 58%),#0c1625;padding:30px;min-width:0}
+.eprohori-dashboard{width:min(100%,390px);padding:20px;border:1px solid #29465a;border-radius:15px;background:linear-gradient(145deg,#101f31,#0a1422);box-shadow:0 24px 70px #0005;transform:rotate(-1deg)}
+.eprohori-top{display:flex;align-items:center;gap:10px;padding-bottom:17px;border-bottom:1px solid #26384d}
+.eprohori-mark{display:grid;place-items:center;width:35px;height:35px;border-radius:10px;background:var(--teal);color:#08202a;font-weight:900;font-size:1.15rem}
+.eprohori-top b,.eprohori-top small{display:block}.eprohori-top b{font-size:.95rem}.eprohori-top small{font-size:.52rem;letter-spacing:.1em;color:#8ea2b9}
+.eprohori-status{margin-left:auto;border:1px solid #365265;border-radius:5px;padding:4px 6px;color:#a8c7d5;font-size:.52rem;letter-spacing:.08em}
+.eprohori-scan{padding:24px 0 18px}.eprohori-scan>span,.eprohori-metrics small{font-size:.57rem;letter-spacing:.12em;color:#8ea2b9;font-weight:800}
+.eprohori-input{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:9px;padding:12px;border:1px solid #31495c;border-radius:8px;background:#0b1523;color:#a8b6c8;font-size:.68rem}.eprohori-input b{color:var(--teal);font-size:1rem}
+.eprohori-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.eprohori-metrics>div{padding:12px 9px;border:1px solid #293c50;border-radius:8px;background:#122033}.eprohori-metrics small,.eprohori-metrics b{display:block}.eprohori-metrics small{font-size:.48rem}.eprohori-metrics b{margin-top:6px;font-size:.75rem;color:#d9e7f5}
+.eprohori-lines{display:grid;gap:7px;margin-top:18px}.eprohori-lines i{display:block;height:5px;width:100%;border-radius:5px;background:#263c51}.eprohori-lines i:nth-child(2){width:82%}.eprohori-lines i:nth-child(3){width:62%}
+@media(max-width:600px){.eprohori-visual{padding:22px 16px;min-height:300px}.eprohori-dashboard{padding:15px}.eprohori-metrics{gap:5px}.eprohori-metrics>div{padding:10px 6px}.eprohori-metrics small{font-size:.43rem}}
