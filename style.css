@@ -368,3 +368,27 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   white-space: pre-wrap;
 }
 .hero-terminal-inline .terminal-sample-box .terminal-output-group { color: #b8cbd7; }
+
+
+/* Keep a visible, readable terminal line during character-by-character transitions */
+.hero-terminal-inline .terminal-sample-box .terminal-screen {
+  display: block;
+  min-height: 126px;
+  max-height: 126px;
+  box-sizing: border-box;
+  padding: 20px 22px;
+  color: #c6d5df;
+  font: 500 .9rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: transparent;
+  overflow: hidden;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-command {
+  color: #41f3be;
+  font-weight: 600;
+  min-height: 1.65em;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-output {
+  color: #c6d5df;
+  min-height: 1.65em;
+  overflow-wrap: anywhere;
+}

@@ -29,19 +29,19 @@
 })();
 
 
-/* One upper terminal area: command and output type, erase character-by-character, then next command. */
+/* Reliable single-screen terminal animation: type command, type output, erase output, erase command. */
 (() => {
   const screen = document.getElementById('terminalScreen');
   if (!screen) return;
 
   const sequence = [
-    ['whoami', ['Md Kamrujjaman — NiloySec', 'OSINT Researcher · CSE Student at DUET']],
-    ['cat profile.txt', ['Focus: Open-source intelligence and digital investigations', 'Approach: Find · Assess · Verify · Report']],
-    ['ls capabilities/', ['reverse-image-research/  digital-footprint-analysis/', 'username-research/  geolocation/  source-verification/']],
-    ['cat methodology.txt', ['Collect public sources → cross-check evidence → document findings', 'Verified facts are separated from assumptions.']],
-    ['ls projects/', ['selected-case-studies/  investigation-workflows/', 'Confidential client information is not published.']],
-    ['cat tools.txt', ['Browser-based research · Reverse image search · Public-source verification', 'Python · Git & GitHub · Web technologies']],
-    ['whoami --contact', ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec · GitHub: github.com/NiloySec']]
+    ['whoami', ['Md Kamrujjaman — NiloySec']],
+    ['cat profile.txt', ['OSINT Researcher · CSE Student at DUET']],
+    ['ls capabilities/', ['reverse-image-research/', 'digital-footprint-analysis/', 'username-research/ · geolocation/']],
+    ['cat methodology.txt', ['Find · Assess · Verify · Report']],
+    ['ls projects/', ['selected-case-studies/ · investigation-workflows/']],
+    ['cat tools.txt', ['Public-source research · Reverse image search · Python · Git']],
+    ['whoami --contact', ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec']]
   ];
 
   let generation = 0;
@@ -57,7 +57,7 @@
     }
     return id === generation;
   }
-  async function eraseText(el, id, delay = 12) {
+  async function eraseText(el, id, delay = 13) {
     while (el.textContent.length) {
       if (id !== generation) return false;
       el.textContent = el.textContent.slice(0, -1);
@@ -68,41 +68,56 @@
   async function run() {
     const id = ++generation;
     if (timerId) clearTimeout(timerId);
+
     const command = document.createElement('div');
     command.className = 'terminal-line terminal-command';
     const output = document.createElement('div');
-    output.className = 'terminal-output-group';
+    output.className = 'terminal-line terminal-output';
     screen.replaceChildren(command, output);
 
     while (id === generation) {
       for (const [cmd, lines] of sequence) {
         if (id !== generation) return;
-        output.replaceChildren();
+        output.textContent = '';
         if (!(await typeText(command, 'root@niloysec:~$ ' + cmd, id))) return;
+        await sleep(300);
+
+        // Keep each output line within the one upper terminal box; no second prompt.
+        for (let i = 0; i < lines.length; i++) {
+          if (id !== generation) return;
+          if (i > 0) {
+            const extra = document.createElement('div');
+            extra.className = 'terminal-line terminal-output';
+            screen.appendChild(extra);
+            if (!(await typeText(extra, lines[i], id, 18))) return;
+          } else {
+            if (!(await typeText(output, lines[i], id, 18))) return;
+          }
+        }
+        await sleep(1200);
+
+        // Character-by-character erase, then the next command replaces the same screen.
+        for (const line of Array.from(screen.children).slice(1)) {
+          if (!(await eraseText(line, id, 12))) return;
+        }
+        screen.replaceChildren(command, output);
+        output.textContent = '';
+        if (!(await eraseText(command, id, 12))) return;
         await sleep(220);
-
-        for (const lineText of lines) {
-          const line = document.createElement('div');
-          line.className = 'terminal-line terminal-output';
-          output.appendChild(line);
-          if (!(await typeText(line, lineText, id, 18))) return;
-        }
-
-        await sleep(850);
-        // Erase output and command from the same upper terminal, one character at a time.
-        for (const line of Array.from(output.children)) {
-          if (!(await eraseText(line, id))) return;
-        }
-        output.replaceChildren();
-        if (!(await eraseText(command, id))) return;
-        await sleep(180);
       }
     }
   }
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    run();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    screen.replaceChildren();
+    const command = document.createElement('div');
+    command.className = 'terminal-line terminal-command';
+    command.textContent = 'root@niloysec:~$ whoami';
+    const output = document.createElement('div');
+    output.className = 'terminal-line terminal-output';
+    output.textContent = 'Md Kamrujjaman — NiloySec';
+    screen.append(command, output);
   } else {
-    screen.textContent = 'OSINT research · digital investigations · evidence-led reporting';
+    run();
   }
 })();
