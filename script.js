@@ -29,11 +29,10 @@
 })();
 
 
-/* NiloySec navy/mint typewriter terminal: relevant OSINT portfolio commands only. */
+/* One upper terminal area: command and output type, erase character-by-character, then next command. */
 (() => {
   const screen = document.getElementById('terminalScreen');
-  const commandView = document.getElementById('terminalAutoCommand');
-  if (!screen || !commandView) return;
+  if (!screen) return;
 
   const sequence = [
     ['whoami', ['Md Kamrujjaman — NiloySec', 'OSINT Researcher · CSE Student at DUET']],
@@ -49,17 +48,7 @@
   let timerId = null;
   const sleep = ms => new Promise(resolve => { timerId = setTimeout(resolve, ms); });
 
-  function clearOutput() {
-    screen.replaceChildren();
-    screen.scrollTop = 0;
-  }
-  function addOutput(text, className = 'terminal-output') {
-    const line = document.createElement('div');
-    line.className = 'terminal-line ' + className;
-    line.textContent = text;
-    screen.appendChild(line);
-  }
-  async function typeInto(el, text, id, delay = 48) {
+  async function typeText(el, text, id, delay = 42) {
     el.textContent = '';
     for (const ch of text) {
       if (id !== generation) return false;
@@ -68,42 +57,52 @@
     }
     return id === generation;
   }
-  async function typeOutputLine(text, id) {
-    const line = document.createElement('div');
-    line.className = 'terminal-line terminal-output';
-    line.textContent = '';
-    screen.appendChild(line);
-    for (const ch of text) {
+  async function eraseText(el, id, delay = 12) {
+    while (el.textContent.length) {
       if (id !== generation) return false;
-      line.textContent += ch;
-      await sleep(16);
+      el.textContent = el.textContent.slice(0, -1);
+      await sleep(delay);
     }
     return id === generation;
   }
-  async function start() {
+  async function run() {
     const id = ++generation;
     if (timerId) clearTimeout(timerId);
+    const command = document.createElement('div');
+    command.className = 'terminal-line terminal-command';
+    const output = document.createElement('div');
+    output.className = 'terminal-output-group';
+    screen.replaceChildren(command, output);
+
     while (id === generation) {
-      for (const [command, lines] of sequence) {
+      for (const [cmd, lines] of sequence) {
         if (id !== generation) return;
-        clearOutput();
-        commandView.textContent = '';
-        if (!(await typeInto(commandView, command, id, 48))) return;
-        addOutput('root@niloysec:~$ ' + command, 'terminal-command');
-        commandView.textContent = '';
-        await sleep(180);
-        for (const line of lines) {
-          if (id !== generation) return;
-          if (!(await typeOutputLine(line, id))) return;
+        output.replaceChildren();
+        if (!(await typeText(command, 'root@niloysec:~$ ' + cmd, id))) return;
+        await sleep(220);
+
+        for (const lineText of lines) {
+          const line = document.createElement('div');
+          line.className = 'terminal-line terminal-output';
+          output.appendChild(line);
+          if (!(await typeText(line, lineText, id, 18))) return;
         }
-        await sleep(1600);
+
+        await sleep(850);
+        // Erase output and command from the same upper terminal, one character at a time.
+        for (const line of Array.from(output.children)) {
+          if (!(await eraseText(line, id))) return;
+        }
+        output.replaceChildren();
+        if (!(await eraseText(command, id))) return;
+        await sleep(180);
       }
     }
   }
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    start();
+    run();
   } else {
-    addOutput('OSINT research · digital investigations · evidence-led reporting', 'terminal-muted');
+    screen.textContent = 'OSINT research · digital investigations · evidence-led reporting';
   }
 })();

@@ -349,3 +349,22 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
 .hero-terminal-inline .terminal-sample-box .terminal-line.terminal-muted {
   color: #7897a7;
 }
+
+
+/* Single terminal screen only: no second prompt row below */
+.hero-terminal-inline .terminal-sample-box {
+  min-height: 0;
+  overflow: hidden;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-screen {
+  min-height: 125px;
+  max-height: 145px;
+  padding: 18px 20px;
+  overflow: hidden;
+  border: 0;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-output-group { color: #b8cbd7; }
