@@ -392,3 +392,33 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   min-height: 1.65em;
   overflow-wrap: anywhere;
 }
+
+
+/* Combined Services + Skills + Case Studies section */
+#capabilities .case-studies {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid rgba(65,243,190,.18);
+}
+#capabilities .merged-skills-heading {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid rgba(65,243,190,.18);
+}
+#capabilities .merged-skills-heading h3 {
+  margin: 0 0 .55rem;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+#capabilities .merged-skills-heading p { margin:0; }
+#capabilities .merged-skills-panel { margin-top: 1rem; }
+.reviews-portfolio-cta {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.75rem;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  border-top:1px solid rgba(65,243,190,.18);
+  text-align:center;
+}
+.reviews-portfolio-cta p { margin:0; }
