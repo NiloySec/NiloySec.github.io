@@ -227,3 +227,8 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   .hero-terminal-inline .terminal-status { display:none; }
   .hero-terminal-inline .terminal-window-title { font-size:.58rem; }
 }
+
+/* Exact hero placement: terminal replaces the former profile-intro + eyebrow rows */
+.hero-terminal-inline { margin-top: 0; margin-bottom: clamp(1rem, 2vw, 1.5rem); }
+.hero-terminal-inline .terminal-screen { min-height: 70px; max-height: 90px; overflow: hidden; }
+.hero-terminal-inline .terminal-shell { max-width: 680px; }

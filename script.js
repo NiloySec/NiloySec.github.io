@@ -29,96 +29,89 @@
 })();
 
 
-/* Safe browser-only terminal: shows one command and its output at a time, then clears before the next. */
+/* One-at-a-time auto terminal. Each command replaces the previous screen completely. */
 (() => {
   const screen = document.getElementById('terminalScreen');
   const commandView = document.getElementById('terminalAutoCommand');
-  const clear = document.getElementById('terminalClear');
-  const replay = document.getElementById('terminalReplay');
-  if (!screen || !commandView || !clear || !replay) return;
+  const clearBtn = document.getElementById('terminalClear');
+  const replayBtn = document.getElementById('terminalReplay');
+  if (!screen || !commandView || !clearBtn || !replayBtn) return;
 
-  const session = [
-    { command: 'whoami', output: ['Md Kamrujjaman — NiloySec', 'OSINT researcher · CSE student at DUET'] },
-    { command: 'date', output: [new Date().toLocaleString(undefined, { dateStyle: 'full', timeStyle: 'short' })] },
-    { command: 'pwd', output: ['/home/visitor/niloysec'] },
-    { command: 'ls', output: ['about/  skills/  projects/  contact/  case-study.pdf'] },
-    { command: 'skills', output: ['OSINT Research', 'Digital Footprint Analysis', 'Reverse Image Research', 'Geolocation Research'] },
-    { command: 'help', output: ['whoami · about · skills · projects · date · pwd · ls · contact · help · clear'] },
-    { command: 'contact', output: ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec', 'GitHub: github.com/NiloySec'] }
+  const sequence = [
+    ['whoami', ['Md Kamrujjaman — NiloySec', 'OSINT researcher · CSE student at DUET']],
+    ['date', [new Date().toLocaleString(undefined, { dateStyle: 'full', timeStyle: 'short' })]],
+    ['pwd', ['/home/visitor/niloysec']],
+    ['ls', ['about/   skills/   projects/   contact/']],
+    ['skills', ['OSINT Research · Digital Footprint Analysis', 'Reverse Image Research · Geolocation']],
+    ['help', ['whoami | date | pwd | ls | skills | about | projects | contact']],
+    ['contact', ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec']]
   ];
 
-  let runId = 0;
-  let timer = null;
-  const wait = ms => new Promise(resolve => { timer = setTimeout(resolve, ms); });
+  let generation = 0;
+  let timerId = null;
+  const sleep = ms => new Promise(resolve => { timerId = setTimeout(resolve, ms); });
 
-  function addLine(text, className = 'terminal-output') {
-    const line = document.createElement('div');
-    line.className = 'terminal-line ' + className;
-    line.textContent = text;
-    screen.appendChild(line);
-  }
-
-  function clearOutput() {
+  function resetOutput() {
     screen.replaceChildren();
     screen.scrollTop = 0;
   }
-
-  async function typeCommand(command, id) {
+  function output(text, type = 'terminal-output') {
+    const row = document.createElement('div');
+    row.className = 'terminal-line ' + type;
+    row.textContent = text;
+    screen.appendChild(row);
+  }
+  async function type(text, current) {
     commandView.textContent = '';
-    for (const char of command) {
-      if (id !== runId) return false;
-      commandView.textContent += char;
-      await wait(75);
+    for (const ch of text) {
+      if (current !== generation) return false;
+      commandView.textContent += ch;
+      await sleep(80);
     }
-    return id === runId;
+    return current === generation;
   }
+  async function start() {
+    generation++;
+    const current = generation;
+    if (timerId) clearTimeout(timerId);
+    commandView.textContent = '';
+    resetOutput();
 
-  async function play() {
-    runId += 1;
-    const id = runId;
-    if (timer) clearTimeout(timer);
-    clearOutput();
-
-    while (id === runId) {
-      for (const item of session) {
-        if (id !== runId) return;
-        clearOutput();
-        addLine('NiloySec Interactive Terminal · safe browser simulation', 'terminal-muted');
-        await wait(450);
-        if (!(await typeCommand(item.command, id))) return;
-
-        addLine('root@niloysec:~$ ' + item.command, 'terminal-command');
+    while (current === generation) {
+      for (const [command, lines] of sequence) {
+        if (current !== generation) return;
+        // Clear absolutely everything from the prior command before showing the next.
+        resetOutput();
         commandView.textContent = '';
-        await wait(300);
-
-        for (const line of item.output) {
-          if (id !== runId) return;
-          addLine(line);
-          await wait(250);
+        if (!(await type(command, current))) return;
+        output('root@niloysec:~$ ' + command, 'terminal-command');
+        commandView.textContent = '';
+        await sleep(250);
+        for (const line of lines) {
+          if (current !== generation) return;
+          output(line);
         }
-
-        // Hold just this command and its output, then clear before the next command.
-        await wait(1700);
+        // Only this one command and its output stay visible during the pause.
+        await sleep(1900);
       }
-      if (id !== runId) return;
-      clearOutput();
-      addLine('Session complete · restarting sequence…', 'terminal-muted');
-      await wait(1000);
+      if (current !== generation) return;
+      resetOutput();
+      output('Restarting terminal session…', 'terminal-muted');
+      await sleep(800);
     }
   }
 
-  clear.addEventListener('click', () => {
-    runId += 1;
-    if (timer) clearTimeout(timer);
-    clearOutput();
+  clearBtn.addEventListener('click', () => {
+    generation++;
+    if (timerId) clearTimeout(timerId);
+    resetOutput();
     commandView.textContent = '';
   });
-  replay.addEventListener('click', play);
+  replayBtn.addEventListener('click', start);
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    play();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    output('Motion reduction enabled. Press REPLAY to start the terminal.', 'terminal-muted');
   } else {
-    addLine('Motion is reduced by your browser preference.', 'terminal-muted');
-    addLine('Press REPLAY to run one command at a time.', 'terminal-muted');
+    start();
   }
 })();
