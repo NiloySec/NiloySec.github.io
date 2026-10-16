@@ -272,3 +272,80 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   .hero-terminal-inline .terminal-sample-box .terminal-auto-row { padding-inline: 12px; flex-wrap: wrap; }
   .hero-terminal-inline .terminal-sample-box .terminal-prompt { font-size: .68rem; }
 }
+
+
+/* Green typewriter terminal inspired by the provided reference */
+.hero-terminal-inline .terminal-sample-box {
+  background: #197d68;
+  border: 3px solid #21d78c;
+  border-radius: 12px;
+  box-shadow: 0 0 22px rgba(33,215,140,.18), inset 0 1px rgba(255,255,255,.06);
+}
+.hero-terminal-inline .terminal-sample-box .terminal-screen {
+  color: #72e9a1;
+  padding: 18px 24px 6px;
+  min-height: 78px;
+  max-height: 125px;
+  font: 500 .95rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-auto-row {
+  background: transparent;
+  min-height: 50px;
+  padding: 8px 24px 16px;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-prompt {
+  color: #00ff78;
+  font-weight: 500;
+  font-size: .95rem;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-auto-command {
+  color: #f0fff8;
+  font-size: .95rem;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-cursor {
+  background: #f0fff8;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-command {
+  color: #f4fff9;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-output {
+  color: #73e9a2;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-muted {
+  color: #80d8b5;
+}
+@media (max-width: 640px) {
+  .hero-terminal-inline .terminal-sample-box .terminal-screen { padding: 14px 16px 4px; }
+  .hero-terminal-inline .terminal-sample-box .terminal-auto-row { padding: 8px 16px 13px; }
+  .hero-terminal-inline .terminal-sample-box .terminal-prompt,
+  .hero-terminal-inline .terminal-sample-box .terminal-auto-command { font-size: .8rem; }
+}
+
+
+/* Match NiloySec's navy + mint cyber palette (not green terminal theme) */
+.hero-terminal-inline .terminal-sample-box {
+  background: linear-gradient(145deg, #07131e, #081923);
+  border: 1px solid rgba(65,243,190,.35);
+  box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.025);
+}
+.hero-terminal-inline .terminal-sample-box .terminal-screen {
+  color: #c2d3df;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-prompt {
+  color: #41f3be;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-auto-command {
+  color: #e5eef5;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-cursor {
+  background: #41f3be;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-command {
+  color: #41f3be;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-output {
+  color: #b8cbd7;
+}
+.hero-terminal-inline .terminal-sample-box .terminal-line.terminal-muted {
+  color: #7897a7;
+}
