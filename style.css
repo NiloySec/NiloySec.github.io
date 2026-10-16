@@ -204,3 +204,26 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
 @media (max-width: 899px) {
   .hero-terminal-visual { margin-top: 1rem; }
 }
+
+/* Single-command display: avoid accumulated history and inner scrolling */
+.hero-terminal-visual .terminal-screen { min-height: 190px; max-height: 220px; overflow-y: hidden; }
+.hero-terminal-visual .terminal-shell { max-height: 390px; }
+
+
+/* Compact auto-terminal above the hero headline */
+.hero-terminal-inline { width:100%; max-width:680px; margin:0 0 clamp(1.2rem,2.5vw,2rem); }
+.hero-terminal-inline .terminal-shell { width:100%; border-radius:12px; }
+.hero-terminal-inline .terminal-topbar { min-height:42px; padding-inline:12px; }
+.hero-terminal-inline .terminal-window-title { font-size:.68rem; }
+.hero-terminal-inline .terminal-status { font-size:.56rem; }
+.hero-terminal-inline .terminal-screen { min-height:78px; max-height:100px; padding:12px 14px 6px; font-size:.78rem; }
+.hero-terminal-inline .terminal-input-row { min-height:48px; padding:9px 14px; gap:8px; }
+.hero-terminal-inline .terminal-prompt { font-size:.74rem; }
+.hero-terminal-inline .terminal-auto-command { font-size:.78rem; }
+.hero-terminal-inline .terminal-run { padding:6px 8px; font-size:.58rem; }
+.hero-terminal-inline .terminal-footer { padding:8px 14px; font-size:.53rem; }
+@media (max-width:640px) {
+  .hero-terminal-inline { margin-bottom:1rem; }
+  .hero-terminal-inline .terminal-status { display:none; }
+  .hero-terminal-inline .terminal-window-title { font-size:.58rem; }
+}
