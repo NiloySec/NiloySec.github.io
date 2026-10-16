@@ -443,3 +443,27 @@ h1{font-weight:850}.hero-lede{color:#c4d4e0}.hero-note{border-left:2px solid var
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
+
+
+/* Keep prompt visible and visually fixed; command suffix animates independently */
+.hero-terminal-inline .terminal-fixed-prompt {
+  display: inline;
+  color: #41f3be;
+  white-space: pre;
+  font-weight: 700;
+}
+.hero-terminal-inline .terminal-command-text {
+  display: inline;
+  color: #41f3be;
+  font-weight: 700;
+}
+.hero-terminal-inline .terminal-output-group {
+  display: block;
+  margin-top: .45rem;
+  min-height: 1.5em;
+}
+.hero-terminal-inline .terminal-output {
+  color: #b8cbd7;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}

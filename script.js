@@ -29,85 +29,99 @@
 })();
 
 
-/* Fixed prompt + command-only typewriter. Only the command and output erase character-by-character. */
+/* Fixed prompt forever. Only the command suffix and output text type/erase. */
 (() => {
   const screen = document.getElementById('terminalScreen');
   if (!screen) return;
 
+  const promptText = 'root@niloysec:~$ ';
   const sequence = [
-    ['whoami', ['Md Kamrujjaman — NiloySec', 'OSINT Researcher · CSE Student at DUET']],
-    ['cat profile.txt', ['Focus: Open-source intelligence and digital investigations', 'Approach: Find · Assess · Verify · Report']],
-    ['ls capabilities/', ['reverse-image-research/  digital-footprint-analysis/', 'username-research/  geolocation/  source-verification/']],
-    ['cat methodology.txt', ['Collect public sources → cross-check evidence → document findings', 'Verified facts are separated from assumptions.']],
-    ['ls projects/', ['selected-case-studies/  investigation-workflows/', 'Confidential client information is not published.']],
-    ['cat tools.txt', ['Browser-based research · Reverse image search · Public-source verification', 'Python · Git & GitHub · Web technologies']],
-    ['whoami --contact', ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec · GitHub: github.com/NiloySec']]
+    ['whoami', ['Md Kamrujjaman — NiloySec']],
+    ['cat profile.txt', ['OSINT Researcher · CSE Student at DUET']],
+    ['ls capabilities/', ['reverse-image-research/', 'digital-footprint-analysis/', 'username-research/ · geolocation/']],
+    ['cat methodology.txt', ['Find · Assess · Verify · Report']],
+    ['ls projects/', ['Selected case studies · Investigation workflows']],
+    ['cat tools.txt', ['Public-source research · Reverse image search · Python · Git']],
+    ['whoami --contact', ['LinkedIn: linkedin.com/in/n1l0y', 'Fiverr: fiverr.com/niloysec']]
   ];
 
-  let generation = 0;
-  let timerId = null;
-  const sleep = ms => new Promise(resolve => { timerId = setTimeout(resolve, ms); });
+  let runId = 0;
+  let timer = null;
+  const sleep = ms => new Promise(resolve => { timer = setTimeout(resolve, ms); });
 
-  async function typeText(el, text, id, delay = 48) {
+  async function typeInto(el, text, id, delay = 48) {
     el.textContent = '';
-    for (const ch of text) {
-      if (id !== generation) return false;
-      el.textContent += ch;
+    for (const char of text) {
+      if (id !== runId) return false;
+      el.textContent += char;
       await sleep(delay);
     }
-    return id === generation;
+    return id === runId;
   }
 
-  async function eraseText(el, id, delay = 12) {
-    while (el.textContent.length) {
-      if (id !== generation) return false;
+  async function eraseFrom(el, id, delay = 13) {
+    while (el.textContent.length > 0) {
+      if (id !== runId) return false;
       el.textContent = el.textContent.slice(0, -1);
       await sleep(delay);
     }
-    return id === generation;
+    return id === runId;
   }
 
   async function run() {
-    const id = ++generation;
-    if (timerId) clearTimeout(timerId);
+    const id = ++runId;
+    if (timer) clearTimeout(timer);
 
-    // One stable command row and a separate output area inside the same terminal box.
     screen.replaceChildren();
+
+    // This prompt node is created once and never edited or removed.
     const commandRow = document.createElement('div');
     commandRow.className = 'terminal-line terminal-command';
+
     const prompt = document.createElement('span');
     prompt.className = 'terminal-fixed-prompt';
-    prompt.textContent = 'root@niloysec:~$ ';
+    prompt.textContent = promptText;
+
     const command = document.createElement('span');
     command.className = 'terminal-command-text';
+
     commandRow.append(prompt, command);
 
-    const output = document.createElement('div');
-    output.className = 'terminal-output-group';
-    screen.append(commandRow, output);
+    const outputArea = document.createElement('div');
+    outputArea.className = 'terminal-output-group';
 
-    while (id === generation) {
+    screen.append(commandRow, outputArea);
+
+    while (id === runId) {
       for (const [cmd, lines] of sequence) {
-        if (id !== generation) return;
-        output.replaceChildren();
-        if (!(await typeText(command, cmd, id, 52))) return;
+        if (id !== runId) return;
 
-        await sleep(260);
+        // Clear output text only; prompt node remains untouched.
+        outputArea.replaceChildren();
+
+        // Type the command after the fixed prompt.
+        if (!(await typeInto(command, cmd, id))) return;
+        await sleep(250);
+
+        // Type each output line character-by-character.
         for (const lineText of lines) {
-          if (id !== generation) return;
           const line = document.createElement('div');
           line.className = 'terminal-line terminal-output';
-          output.appendChild(line);
-          if (!(await typeText(line, lineText, id, 17))) return;
+          outputArea.appendChild(line);
+          if (!(await typeInto(line, lineText, id, 18))) return;
         }
 
         await sleep(1000);
-        for (const line of Array.from(output.children)) {
-          if (!(await eraseText(line, id, 10))) return;
+
+        // Erase output characters one by one, keeping the prompt visible.
+        for (const line of Array.from(outputArea.children)) {
+          if (!(await eraseFrom(line, id, 11))) return;
         }
-        output.replaceChildren();
-        if (!(await eraseText(command, id, 10))) return;
-        await sleep(220);
+        outputArea.replaceChildren();
+
+        // Erase only the command suffix, never the fixed prompt.
+        if (!(await eraseFrom(command, id, 11))) return;
+        await sleep(200);
       }
     }
   }
@@ -116,11 +130,17 @@
     screen.replaceChildren();
     const row = document.createElement('div');
     row.className = 'terminal-line terminal-command';
-    row.textContent = 'root@niloysec:~$ whoami';
-    const out = document.createElement('div');
-    out.className = 'terminal-line terminal-output';
-    out.textContent = 'Md Kamrujjaman — NiloySec';
-    screen.append(row, out);
+    const prompt = document.createElement('span');
+    prompt.className = 'terminal-fixed-prompt';
+    prompt.textContent = promptText;
+    const command = document.createElement('span');
+    command.className = 'terminal-command-text';
+    command.textContent = 'whoami';
+    row.append(prompt, command);
+    const output = document.createElement('div');
+    output.className = 'terminal-line terminal-output';
+    output.textContent = 'Md Kamrujjaman — NiloySec';
+    screen.append(row, output);
   } else {
     run();
   }
